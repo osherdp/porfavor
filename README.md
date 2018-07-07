@@ -1,7 +1,7 @@
 Por favor
 =========
 
-Publishing static documentation in the easiest way possible!
+Publishing static documentation the easiest way possible!
 
 Install
 -------
