@@ -26,10 +26,13 @@ Now, to deploy documentation on the server, all you have to do is running
 ```porfavor publish``` with the right arguments:
 
 ```shell
-$ porfavor publish localhost project_name root_dir
+$ # porfavor publish <server's domain or IP address> \
+>                    <project name> \
+>                    <documentation root>
+$ porfavor publish localhost my_amazing_project docs/_build/html/
 Connecting to host on localhost...
 Connected successfully!
-Publishing content for project 'project_name'
+Publishing content for project 'my_amazing_project'
 100%|███████████████████████████████████████████| 108/108 [00:03<00:00, 34.77 files/s]
 Finished publishing successfully!
 ```
@@ -40,7 +43,8 @@ automatic:
 ```python
 from porfavor import publish
 
-publish(host="localhost",
-        project="project_name",
-        root_dir="root_dir")
+if __name__ == '__main__':
+    publish(host="localhost",
+            project="project_name",
+            root_dir="root_dir")
 ```

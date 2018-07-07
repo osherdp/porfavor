@@ -1,8 +1,8 @@
 """Publish documentation for a project on the server.
 
 Usage:
-    porfavor-publish <host> <project> <directory>
-    porfavor-publish -h | --help
+    client.py <host> <project> <directory>
+    client.py -h | --help
 
 Options:
     -h --help           Display help message and exit.

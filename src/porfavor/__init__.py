@@ -1,12 +1,14 @@
-"""Manage documentation in a client-server architechture.
+"""Manage documentation in a client-server architecture.
 
 Usage:
-    porfavor serve [--work-dir <dir>] [-D|--daemon]
+    porfavor serve [--work-dir <dir>] [-p <port> | --port <port>]
+                   [-D | --daemon]
     porfavor publish <host> <project> <directory>
     porfavor -h | --help
 
 Options:
     --work-dir <dir>    Directory to server files under it [default: .]
+    --port <port> -p <port>     Port for the web server [Default: 5000].
     -D --daemon         Run in the background.
 """
 import docopt
@@ -19,6 +21,7 @@ def main():
     arguments = docopt.docopt(__doc__)
     if arguments["serve"]:
         run_server(work_dir=arguments["--work-dir"],
+                   port=arguments["--port"],
                    daemon=arguments["--daemon"])
 
     if arguments["publish"]:
