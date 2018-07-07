@@ -14,11 +14,12 @@ from __future__ import print_function
 import os
 import threading
 
+import magic
 import docopt
 from rpyc import Service
 from rpyc.utils.helpers import classpartial
 from rpyc.utils.server import ThreadedServer
-from flask import Flask, send_from_directory, render_template, abort
+from flask import Flask, send_from_directory, render_template, abort, Response
 
 
 class PublishService(Service):
@@ -57,7 +58,12 @@ def run_server(work_dir, port, daemon):
         if not path.startswith(directory):
             abort(401)
 
-        return send_from_directory(directory, filename)
+        mime = magic.Magic(mime=True)
+        mime_type = mime.from_file(path)
+        with open(path, "r") as file_to_send:
+            resp = Response(file_to_send.read(), mimetype=mime_type)
+
+        return resp
 
     publish_server = ThreadedServer(classpartial(PublishService, work_dir),
                                     port=12341)
