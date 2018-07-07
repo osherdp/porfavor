@@ -6,7 +6,9 @@ Publishing static documentation in the easiest way possible!
 Install
 -------
 
+```shell
 $ pip install porfavor
+```
 
 Use
 ---
