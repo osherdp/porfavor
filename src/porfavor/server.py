@@ -40,6 +40,7 @@ class PublishService(Service):
 
 
 def run_server(work_dir, port, daemon):
+    work_dir = os.path.abspath(work_dir)
     app = Flask(__name__)
 
     @app.route('/')
@@ -52,6 +53,7 @@ def run_server(work_dir, port, daemon):
 
     @app.route('/<path:path>')
     def static_proxy(path):
+        path = path.replace("/", os.sep)
         path = os.path.join(work_dir, path)
         directory, filename = os.path.split(path)
         if not path.startswith(directory):
@@ -70,7 +72,7 @@ def run_server(work_dir, port, daemon):
 
 def main():
     arguments = docopt.docopt(__doc__)
-    run_server(work_dir=os.path.abspath(arguments["--work-dir"]),
+    run_server(work_dir=arguments["--work-dir"],
                port=int(arguments["--port"]),
                daemon=arguments["--daemon"])
 
