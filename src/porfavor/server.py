@@ -11,6 +11,8 @@ Options:
     -D --daemon                 Run in the background.
 """
 from __future__ import print_function
+
+import json
 import os
 import threading
 
@@ -51,19 +53,42 @@ def run_server(work_dir, port, daemon):
         return render_template("index.html",
                                projects=projects)
 
-    @app.route('/<path:path>')
-    def static_proxy(path):
-        path = os.path.join(work_dir, path)
-        directory, filename = os.path.split(path)
-        if not path.startswith(directory):
-            abort(401)
 
+    @app.route('/api/get_projects')
+    def get_projects():
+        projects = {}
+        for path in os.listdir(work_dir):
+            if os.path.isdir(os.path.join(work_dir, path)):
+                icon_path = os.path.join(work_dir, path, "icon.png")
+                projects[path] = {
+                    "icon": icon_path if os.path.exists(icon_path) else None
+                }
+        print(projects)
+        return Response(json.dumps(projects), mimetype="application/json")
+
+
+    def _serve_static_file_from_directory(base_dir, path):
+        path = os.path.join(base_dir, path)
         mime = magic.Magic(mime=True)
         mime_type = mime.from_file(path)
         with open(path, "r") as file_to_send:
             resp = Response(file_to_send.read(), mimetype=mime_type)
 
         return resp
+
+    @app.route('/static/<path:path>')
+    def static_serve(path):
+        static_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+        return _serve_static_file_from_directory(static_directory, path)
+
+    @app.route('/projects/<path:path>')
+    def static_proxy(path):
+        actual_path = os.path.join(work_dir, path)
+        directory, filename = os.path.split(actual_path)
+        if not actual_path.startswith(directory):
+            abort(401)
+
+        return _serve_static_file_from_directory(work_dir, path)
 
     publish_server = ThreadedServer(classpartial(PublishService, work_dir),
                                     port=12341)

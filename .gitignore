@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+src/porfavor/static/node_modules/
+.idea/
+src/porfavor/static/package-lock.json
