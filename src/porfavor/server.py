@@ -61,8 +61,8 @@ def run_server(work_dir, port, daemon):
 
     publish_server = ThreadedServer(classpartial(PublishService, work_dir),
                                     port=12341)
-    thread = threading.Thread(target=publish_server.start,
-                              daemon=True)
+    thread = threading.Thread(target=publish_server.start)
+    thread.daemon = True
     thread.start()
 
     app.run(port=port)
