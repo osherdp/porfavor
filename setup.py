@@ -7,7 +7,7 @@ with open("README.md", "r") as readme:
 
 setuptools.setup(
     name="porfavor",
-    version="0.0.1",
+    version="0.1.0",
     author="osherdp",
     author_email="osherdepaz@gmail.com",
     url="https://github.com/osherdp/porfavor",
@@ -24,6 +24,7 @@ setuptools.setup(
         ]
     },
     install_requires=["flask", "tqdm", "rpyc", "docopt"],
+    package_data={'': ['*.html', '*.css', '*.js']},
 
     classifiers=(
         "Programming Language :: Python :: 3",

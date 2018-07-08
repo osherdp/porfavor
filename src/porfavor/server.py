@@ -12,16 +12,15 @@ Options:
 """
 from __future__ import print_function
 
-import json
 import os
+import json
 import threading
 
-import magic
 import docopt
 from rpyc import Service
 from rpyc.utils.helpers import classpartial
 from rpyc.utils.server import ThreadedServer
-from flask import Flask, send_from_directory, render_template, abort, Response
+from flask import Flask, render_template, abort, send_file
 
 
 class PublishService(Service):
@@ -43,6 +42,7 @@ class PublishService(Service):
 
 
 def run_server(work_dir, port, daemon):
+    work_dir = os.path.abspath(work_dir)
     app = Flask(__name__)
 
     @app.route('/')
@@ -52,7 +52,6 @@ def run_server(work_dir, port, daemon):
 
         return render_template("index.html",
                                projects=projects)
-
 
     @app.route('/api/get_projects')
     def get_projects():
@@ -69,12 +68,7 @@ def run_server(work_dir, port, daemon):
 
     def _serve_static_file_from_directory(base_dir, path):
         path = os.path.join(base_dir, path)
-        mime = magic.Magic(mime=True)
-        mime_type = mime.from_file(path)
-        with open(path, "r") as file_to_send:
-            resp = Response(file_to_send.read(), mimetype=mime_type)
-
-        return resp
+        return send_file(path)
 
     @app.route('/static/<path:path>')
     def static_serve(path):
@@ -92,8 +86,8 @@ def run_server(work_dir, port, daemon):
 
     publish_server = ThreadedServer(classpartial(PublishService, work_dir),
                                     port=12341)
-    thread = threading.Thread(target=publish_server.start,
-                              daemon=True)
+    thread = threading.Thread(target=publish_server.start)
+    thread.daemon = True
     thread.start()
 
     app.run(port=port)
@@ -101,7 +95,7 @@ def run_server(work_dir, port, daemon):
 
 def main():
     arguments = docopt.docopt(__doc__)
-    run_server(work_dir=os.path.abspath(arguments["--work-dir"]),
+    run_server(work_dir=arguments["--work-dir"],
                port=int(arguments["--port"]),
                daemon=arguments["--daemon"])
 
