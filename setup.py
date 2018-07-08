@@ -24,6 +24,7 @@ setuptools.setup(
         ]
     },
     install_requires=["flask", "tqdm", "rpyc", "docopt"],
+    package_data={'': ['*.html', '*.css', '*.js']},
 
     classifiers=(
         "Programming Language :: Python :: 3",
