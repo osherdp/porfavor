@@ -102,8 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-src/porfavor/static/node_modules/
-src/porfavor/static/package-lock.json
 
 # Jetbrains
 .idea
+
+# Node
+node_modules/
+package-lock.json

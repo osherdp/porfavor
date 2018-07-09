@@ -2,16 +2,16 @@ const path = require("path");
 
 module.exports = {
     devtool: "source-map",
-    entry: "./src/index.js",
+    entry: "./frontend/index.js",
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "src", "porfavor", "static")
     },
     module: {
         rules: [
             {
                 test: /\.js?/,
-                include: path.resolve(__dirname, "src"),
+                include: path.resolve(__dirname, "frontend"),
                 loader: "babel-loader"
             },
             {
@@ -20,7 +20,7 @@ module.exports = {
                 options: {
                     name: "[name].[ext]",
                     outputPath: "img/",
-                    publicPath: "static/dist/img/"
+                    publicPath: "static/img/"
                     // the images will be emmited to public/assets/images/ folder
                     // the images will be put in the DOM <style> tag as eg. background: url(assets/images/image.png);
                 }
@@ -32,7 +32,7 @@ module.exports = {
                     limit: "10000",
                     name: "[name].[ext]",
                     outputPath: "fonts/",
-                    publicPath: "static/dist/fonts/"
+                    publicPath: "static/fonts/"
                     // the fonts will be emmited to public/assets/fonts/ folder
                     // the fonts will be put in the DOM <style> tag as eg. @font-face{ src:url(assets/fonts/font.ttf); }
                 }

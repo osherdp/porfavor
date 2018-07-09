@@ -1,12 +1,13 @@
 """Run the hosting documentation server.
 
 Usage:
-    server.py [--work-dir <dir>] [-p <port> | --port <port>] [-D | --daemon]
+    server.py [--work-dir <dir>] [--host <host>] [-p <port> | --port <port>] [-D | --daemon]
     server.py -h | --help
 
 Options:
     -h --help                   Display help message and exit.
     --work-dir <dir>            Directory to server files under it [Default: .]
+    --host <host>               Host ip address of the server [Default: 0.0.0.0].
     --port <port> -p <port>     Port for the web server [Default: 5000].
     -D --daemon                 Run in the background.
 """
@@ -41,7 +42,7 @@ class PublishService(Service):
                 f.write(content)
 
 
-def run_server(work_dir, port, daemon):
+def run_server(host, work_dir, port, daemon):
     work_dir = os.path.abspath(work_dir)
     app = Flask(__name__)
 
@@ -61,10 +62,9 @@ def run_server(work_dir, port, daemon):
                 icon_path = os.path.join(work_dir, path, "icon.png")
                 projects[path] = {
                     "icon": icon_path if os.path.exists(icon_path) else None
-                }
+                    }
         print(projects)
         return Response(json.dumps(projects), mimetype="application/json")
-
 
     def _serve_static_file_from_directory(base_dir, path):
         path = os.path.join(base_dir, path)
@@ -90,12 +90,13 @@ def run_server(work_dir, port, daemon):
     thread.daemon = True
     thread.start()
 
-    app.run(port=port)
+    app.run(host=host, port=port)
 
 
 def main():
     arguments = docopt.docopt(__doc__)
-    run_server(work_dir=arguments["--work-dir"],
+    run_server(host=arguments["--host"],
+               work_dir=arguments["--work-dir"],
                port=int(arguments["--port"]),
                daemon=arguments["--daemon"])
 
