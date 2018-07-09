@@ -12,15 +12,15 @@ Options:
 """
 from __future__ import print_function
 
-import json
 import os
+import json
 import threading
 
 import docopt
 from rpyc import Service
 from rpyc.utils.helpers import classpartial
 from rpyc.utils.server import ThreadedServer
-from flask import Flask, render_template, abort, Response, send_file
+from flask import Flask, render_template, abort, send_file, Response
 
 
 class PublishService(Service):
@@ -42,6 +42,7 @@ class PublishService(Service):
 
 
 def run_server(work_dir, port, daemon):
+    work_dir = os.path.abspath(work_dir)
     app = Flask(__name__)
 
     @app.route('/')
@@ -51,7 +52,6 @@ def run_server(work_dir, port, daemon):
 
         return render_template("index.html",
                                projects=projects)
-
 
     @app.route('/api/get_projects')
     def get_projects():
@@ -86,8 +86,8 @@ def run_server(work_dir, port, daemon):
 
     publish_server = ThreadedServer(classpartial(PublishService, work_dir),
                                     port=12341)
-    thread = threading.Thread(target=publish_server.start,
-                              daemon=True)
+    thread = threading.Thread(target=publish_server.start)
+    thread.daemon = True
     thread.start()
 
     app.run(port=port)
@@ -95,7 +95,7 @@ def run_server(work_dir, port, daemon):
 
 def main():
     arguments = docopt.docopt(__doc__)
-    run_server(work_dir=os.path.abspath(arguments["--work-dir"]),
+    run_server(work_dir=arguments["--work-dir"],
                port=int(arguments["--port"]),
                daemon=arguments["--daemon"])
 
