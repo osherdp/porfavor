@@ -17,7 +17,7 @@ setuptools.setup(
 
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
-    package_data={"porfavor": ["static/dist/**", "templates/**"]},
+    package_data={"porfavor": ["static/**", "templates/**"]},
     entry_points={
         "console_scripts": [
             "porfavor= porfavor:main",
