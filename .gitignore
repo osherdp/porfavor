@@ -109,3 +109,6 @@ venv.bak/
 # Node
 node_modules/
 package-lock.json
+
+# static files
+src/porfavor/static
