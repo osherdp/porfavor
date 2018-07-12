@@ -10,13 +10,13 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
 lib/
 lib64/
 parts/
+dist/
 sdist/
 var/
 wheels/
@@ -105,3 +105,10 @@ venv.bak/
 
 # Jetbrains
 .idea
+
+# Node
+node_modules/
+package-lock.json
+
+# static files
+src/porfavor/static

@@ -1,0 +1,38 @@
+{
+  "name": "porfavor-frontend",
+  "version": "0.1.0",
+  "description": "Frontend for porfavor doc server",
+  "main": "frontend/index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osherdp/porfavor.git"
+  },
+  "keywords": [
+    "porfavor",
+    "doc"
+  ],
+  "author": "Osher De-Paz, Elran Shefer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/osherdp/porfavor/issues"
+  },
+  "homepage": "https://github.com/osherdp/porfavor#readme",
+  "devDependencies": {
+    "@webpack-cli/init": "0.0.8",
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "file-loader": "^1.1.11",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.0",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-css-loaders": "^1.0.0"
+  }
+}

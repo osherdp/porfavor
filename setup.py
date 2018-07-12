@@ -11,20 +11,19 @@ setuptools.setup(
     author="osherdp",
     author_email="osherdepaz@gmail.com",
     url="https://github.com/osherdp/porfavor",
-
     description="Publishing static documentation the easy way",
     long_description=long_description,
     long_description_content_type="text/markdown",
 
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
+    package_data={"porfavor": ["static/**", "templates/**"]},
     entry_points={
         "console_scripts": [
             "porfavor= porfavor:main",
         ]
     },
     install_requires=["flask", "tqdm", "rpyc", "docopt"],
-    package_data={'': ['*.html', '*.css', '*.js']},
 
     classifiers=(
         "Programming Language :: Python :: 3",
