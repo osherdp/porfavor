@@ -20,7 +20,7 @@
     "url": "https://github.com/osherdp/porfavor/issues"
   },
   "homepage": "https://github.com/osherdp/porfavor#readme",
-  "devDependencies": {
+  "dependencies": {
     "@webpack-cli/init": "0.0.8",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
