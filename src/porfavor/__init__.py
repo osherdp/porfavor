@@ -1,35 +1,17 @@
-"""Manage documentation in a client-server architecture.
+"""Manage documentation in a client-server architecture."""
+import click
 
-Usage:
-    porfavor serve [--work-dir <dir>] [--host <host>] [-p <port> | --port <port>]
-                   [-D | --daemon]
-    porfavor publish <host> <project> <directory>
-    porfavor -h | --help
-
-Options:
-    --work-dir <dir>            Directory to server files under it [Default: .].
-    --host <host>               Host ip address of the server [Default: 0.0.0.0].
-    --port <port> -p <port>     Port for the web server [Default: 5000].
-    -D --daemon                 Run in the background.
-"""
-import docopt
-
-from .client import publish
-from .server import run_server
+from .server import server_cli
+from .client import publish, publish_cli  # noqa
 
 
+@click.group(context_settings=dict(help_option_names=['-h', '--help']))
 def main():
-    arguments = docopt.docopt(__doc__)
-    if arguments["serve"]:
-        run_server(host=arguments["--host"],
-                   work_dir=arguments["--work-dir"],
-                   port=arguments["--port"],
-                   daemon=arguments["--daemon"])
+    """Manage documentation the easiest way possible."""
 
-    if arguments["publish"]:
-        publish(host=arguments["<host>"],
-                project=arguments["<project>"],
-                root_dir=arguments["<directory>"])
+
+main.add_command(server_cli)
+main.add_command(publish_cli)
 
 
 if __name__ == "__main__":

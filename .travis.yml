@@ -1,0 +1,20 @@
+stages:
+- test
+- deploy
+
+language: python
+python:
+- '2.7'
+- '3.6'
+install: pip install tox
+script: tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
+
+deploy:
+  stage: deploy
+  provider: pypi
+  on:
+    tags: true
+  distributions: sdist bdist_wheel
+  user: osherdp
+  password:
+    secure: hs15cAShzHlrVtkhUBH50IzhyXD0NZs9LnJJl8QoQeQgk0GaOB82J1bELV0Ii0meUWNDzg6Jh6VAUWrn54e4Q3kK07ZxcVrzG3vxiWwAft+GxZIjBbV6zJ+C8PNqUIk3mnUVpXJwI1J323NEQN5VGQPwxTJO1hLPslA8YshOtq2+bLHtCf7PzhxnbtPvT7tEUjdaEqa8aNfE//efeASZWSFlh+HhPA24A+nBY+G9dAmH+xaClbBvotnc3rPqsezf4Z55JPCCHLi9BZGrEgzjxmOtQWlIR5cSGVp5hwNl2r/bdNw8Exq9Ca9HMygdHyiNg+Lb68hWEGznY22NFptaKu1w/FDGA3QYMqaVHNvDkvgS/X1gNFhXJU3UoW3r3thry2h+GdisML0gmm0O3dB4jp/7xwaF2+apsmZ1radQoamfquyv0wud5rj7lCHz4YgHBr9ogZAWqXmpboLyXB9xfnAVJSkK8rVypLlJ/wzq/7Hn3XWXq7iu8ORj/q+ZEFPYX9fsWu307ipPonCB2A34piqjWG1cDygN8pJHL3RWhdXqe/zynPEcDmRYIYqhHG+KjjCwUDu8s7LbWziL2YqGWa9a6n14DTnK0LwnmsQ2cpVOHqhm4VuKBdxoMzNK7cN1uEgFa3Pdc2YvEbGRZiIhpoOwLqpYFf6DY2EGiGB/wO8=

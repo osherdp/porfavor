@@ -1,6 +1,8 @@
 Por favor
 =========
 
+[![PyPI](https://badge.fury.io/py/porfavor.svg)](https://pypi.python.org/pypi/porfavor)
+
 Publishing static documentation the easiest way possible!
 
 Install
