@@ -17,6 +17,7 @@ jobs:
   - stage: deploy
     python: '3.6'
     script: skip
+    before_script: npm install && npm run build
     deploy:
       stage: deploy
       skip_cleanup: true
