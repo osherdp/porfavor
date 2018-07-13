@@ -1,12 +1,13 @@
 """Run the hosting documentation server.
 
 Usage:
-    server.py [WORK_DIR] [--host <host>] [-p <port> | --port <port>]
+    server.py [WORK_DIR] [-H <host> | --host <host>]
+                         [-p <port> | --port <port>]
     server.py -h | --help
 
 Options:
     -h --help                 Display help message and exit.
-    --host <host>             Host ip address of the server [Default: 0.0.0.0].
+    --host <host> -H <host>   Host ip address of the server [Default: 0.0.0.0].
     --port <port> -p <port>   Port for the web server [Default: 5000].
 """
 # pylint: disable=no-value-for-parameter
@@ -114,8 +115,8 @@ def static_proxy(path):
 @click.argument("work_dir", default=".",
                 type=click.Path(exists=True, file_okay=False,
                                 resolve_path=True))
-@click.option("--host", "-H")
-@click.option("--port", "-p", type=int)
+@click.option("--host", "-H", default="0.0.0.0")
+@click.option("--port", "-p", type=int, default=5000)
 def server_cli(work_dir, host, port):
     """Run the server side of porfavor.
 

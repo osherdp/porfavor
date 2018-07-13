@@ -31,11 +31,13 @@ def publish(host, project, root_dir):
     temp_dir = None
     try:
         temp_dir = tempfile.mkdtemp()
-        click.secho("Zipping content of folder '{}'...".format(root_dir))
+        click.secho("Zipping content of folder '{}'... ".format(root_dir),
+                    nl=False)
         shutil.make_archive(os.path.join(temp_dir, project), "zip", root_dir)
-        click.secho("Directory zipped successfully!", bold=True)
+        click.secho("DONE!", bold=True, fg="green")
 
-        click.secho("Publishing content for project '{}'...".format(project))
+        click.secho("Publishing content for project '{}'... ".format(project),
+                    nl=False)
         filename = "{}.zip".format(project)
         with open(os.path.join(temp_dir, filename), "rb") as zip_file:
             content = zip_file.read()
@@ -50,7 +52,7 @@ def publish(host, project, root_dir):
             headers={"Content-Type": multipart.content_type})
 
         response.raise_for_status()
-        click.secho("Finished publishing successfully!", bold=True)
+        click.secho("DONE!", bold=True, fg="green")
 
     finally:
         if temp_dir is not None:

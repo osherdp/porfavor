@@ -2,6 +2,7 @@ Por favor
 =========
 
 [![PyPI](https://badge.fury.io/py/porfavor.svg)](https://pypi.python.org/pypi/porfavor)
+[![Build Status](https://travis-ci.com/osherdp/porfavor.svg?branch=master)](https://travis-ci.com/osherdp/porfavor)
 
 Publishing static documentation the easiest way possible!
 
@@ -21,22 +22,19 @@ It listens to any client and puts the given documentation in its right place.
 On the server, run:
 ```shell
 $ pip install porfavor
-$ porfavor serve --work-dir .  # replace '.' with the desired working directory
+$ porfavor serve .  # replace '.' with the desired working directory
 ```
 
 Now, to deploy documentation on the server, all you have to do is running
 ```porfavor publish``` with the right arguments:
 
 ```shell
-$ # porfavor publish <server's domain or IP address> \
+$ # porfavor publish <server's URL> \
 >                    <project name> \
 >                    <documentation root>
-$ porfavor publish localhost my_amazing_project docs/_build/html/
-Connecting to host on localhost...
-Connected successfully!
-Publishing content for project 'my_amazing_project'
-100%|███████████████████████████████████████████| 108/108 [00:03<00:00, 34.77 files/s]
-Finished publishing successfully!
+$ porfavor publish localhost:5000 my_amazing_project docs/_build/html/
+Zipping content of folder 'docs/_build/html'... DONE!
+Publishing content for project 'my_amazing_project'... DONE!
 ```
 
 Alternatively, you can write the following script, to make deployment more
@@ -46,7 +44,7 @@ automatic:
 from porfavor import publish
 
 if __name__ == '__main__':
-    publish(host="localhost",
+    publish(host="localhost:5000",
             project="project_name",
             root_dir="root_dir")
 ```
