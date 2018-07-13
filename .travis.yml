@@ -2,7 +2,6 @@ stages:
 - test
 - name: deploy
   if: tag IS present
-
 language: python
 python:
 - '2.7'
@@ -13,19 +12,18 @@ script:
 - tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
 - npm install
 - npm run build
-
 jobs:
   include:
-    - stage: deploy
-      python: "3.6"
-      script: skip
-      deploy:
-        stage: deploy
-        skip_cleanup: true
-        provider: pypi
-        on:
-          tags: true
-        distributions: sdist bdist_wheel
-        user: osherdp
-        password:
-          secure: fc4/fMgl809z3BD2E9M8WgKHXSu6ZlB8oG7V2SUOKCWyNDo0o+48mGEUrt0E9MfGheik4dZrbJuLAAPHortnTW4q91qrvqIXLQ8cuIY7qhZOFz+GAgyRqXztjo+ltn3Wbo374+Z048JUAVjiCcHQIoaMZihVSL5b5ZGGx1f9EwZi6w0yROxuvgfkh/a3anN+001eF+Q5rc7YeLlfXWwFUdOa9i66mmzSqD3FkZygw7bvUnnqHSpraK1utmY567EBPQ0d7MV9wAiTkeV8sxkpjGitjxOATs3gFS3UREgCtyeDQA8ihLhxpS/1FdavcTo/eoGyevFEzJVW17sfD7NfxI76Kx/7VB+ZS7WiDiBdpYRjd12tEs98Q6r6pILUU1ozv+RTxBkzP4occErPJ2HcLGxcrqwy0gVTulLXhwSBODPGbIOcspj78zbrqDp5/m9oX8RKQRkHYtZOAJn5SJp2YbNM3KHn67ZDG7vrz9hhWNrTwhjz3GgP45U44BjRQXaFRBvF/jT/jxVRw2VymdcMeJCjlMefWFuSn5M/yW2j2E3GpSo3waU0mHxQ3+AEX6E/bHqPlygzY+zJw+4IzQQJrn4yK0/NK78oYsyN0vDIfLWHhiwEp4GqYW547OFFmCCAySpXFBSLEul5aokySSciVRf2eXHzt5xMsFErqAry59M=
+  - stage: deploy
+    python: '3.6'
+    script: skip
+    deploy:
+      stage: deploy
+      skip_cleanup: true
+      provider: pypi
+      on:
+        tags: true
+      distributions: sdist bdist_wheel
+      user: osherdp
+      password:
+        secure: j1rI4UAUBnTvbv52W7LYwoxp+NHNU7E5b6QIDg+ZuXtP3d7WYwp5fG2DxgiSDGQQWahqZUlHNhkqAnyg/81GNe2qpbsgHUwHXsQlI8l90GEySdIqqnmjZ8kGnp23BbUWeqiJSvuq/BKoBOFb3jpp8G+VkoUDybpi8UEAPeqJvmm+DziLED5dHbYda7AXjCAFcKxRFODwfKKRUtBHglNFTr/IFlETqTnHR80SXYolEwp3r9sDGkEBK2NFrUP95fouU1WW8X8GW/5MT44SQwwvzdvAA7vpJwmXTm0tIAVXHGm7Tgb5lhPYzMiTNF2uw0mOjdWTztwXD4b4kxycXb4Iz/1l3Zmppf6PARjlN0AS5mqXaP0Af3TqpIHFCB2XRD7Mpgq4vF+4wzZcqvCzG4EOt3mGPr+EfPKoV0MDpbhFOfLbawzaoL3skDDrjR6p0JoIhxLbS/PRBTVBSGyntT/cqL6ahbbSD44k1JeUFgoHSxj8OlA8jjYsGl/2QrVX4hiHQwkQ88ld34z2pgxUeCytIxOj/4LKTP2X/sPd8arI2pwB3vZ3OxPv1BXEZ00r6M0Rik1VQwIjx46/ofIbmkk7OTEkSiBI0LZ9lUjCoMwRptfQFUfGmTdVwdcHgZQV5Z9uqfMMrnX/Lsbijdm47nh/JE1jr8i4M04Xf8cqb8KlaXA=
