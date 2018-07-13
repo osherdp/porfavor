@@ -1,10 +1,11 @@
 """Define packaging-related data for deploying porfavor."""
 import setuptools
 
+__version__ = "0.3.0"
 
 setuptools.setup(
     name="porfavor",
-    version="0.3.0",
+    version=__version__,
     author="osherdp",
     author_email="osherdepaz@gmail.com",
     url="https://github.com/osherdp/porfavor",
