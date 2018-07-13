@@ -8,10 +8,15 @@ python:
 - '3.5'
 - '3.6'
 install: pip install tox
-script: tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
+script:
+- tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
+- npm install
+- npm run build
 
 deploy:
   stage: deploy
+  skip_cleanup: true
+  before_script: npm install && npm run build
   provider: pypi
   on:
     tags: true
