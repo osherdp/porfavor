@@ -1,13 +1,12 @@
 
 .ProjectContainer {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     position: relative;
     user-select: none;
     transition: 0.5s;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     text-decoration: none;
     color: black;
@@ -28,11 +27,12 @@
 }
 
 .ProjectContainer:not(:last-child) {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .ProjectContainer:hover {
     background-color: #BBDEFB;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .ProjectContainer .Picture {
