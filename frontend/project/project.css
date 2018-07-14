@@ -1,0 +1,63 @@
+
+.ProjectContainer {
+    position: relative;
+    user-select: none;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.clicked {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
+}
+
+.ProjectContainer .Decore {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.ProjectContainer:not(:last-child) {
+    /*margin-bottom: 10px;*/
+}
+
+.ProjectContainer:hover {
+    background-color: #F5F5F5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.ProjectContainer .Picture {
+    max-width: 40px;
+    max-height: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.ProjectContainer .Picture img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ProjectContainer .Name {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.ProjectContainer .Name span {
+    font-size: 13pt;
+}

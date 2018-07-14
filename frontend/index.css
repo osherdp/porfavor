@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'JosefinSans';
+    src: url("JosefinSans-Regular.ttf");
+}
+html, body {
+    font-family: 'JosefinSans', sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.Container {
+    max-width: 800px;
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Container h1, .Container h4{
+    margin: 0;
+    margin-right: auto;
+    margin-left: auto;
+    display: inline-block;
+}
+.Container h4 {
+    margin-bottom: 10px;
+}
+.Container hr {
+    height: 0;
+    width: 100%;
+}
+.Container .TopBar {
+    display: flex;
+    margin-bottom: 10px;
+    background-color: #EEEEEE;
+    padding: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.Container .TopBar .Spacer {
+    flex: 1;
+}
+.Container .TopBar .Search {
+    background-color: #FAFAFA;
+    border: 1px solid #FAFAFA;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: 0.5s;
+    border-radius: 5px;
+}
+.Container .TopBar .Search:focus-within {
+    /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);*/
+    border: 1px solid #000000;
+}
+.Container .TopBar .Search input {
+    background-color: rgba(0,0,0,0);
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+}
+.Container .TopBar .Search input:focus {
+    outline: none;
+}
+.Container .TopBar .Search img {
+    width: 20px;
+    height: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.Container .Projects {
+    display: flex;
+    flex-direction: column;
+}
