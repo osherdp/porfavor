@@ -1,0 +1,13 @@
+.DecoreNode {
+    width: 2px;
+    height: 2px;
+    transition: 0.5s;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    transform: scale(0, 0);
+    transform-origin: 50% 50%;
+    background-color: white;
+    opacity: 0.3;
+    position: absolute;
+}

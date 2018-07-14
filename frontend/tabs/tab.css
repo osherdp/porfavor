@@ -1,0 +1,19 @@
+.Tab{
+    margin-top: auto;
+    margin-bottom: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+.Tab:not(:last-child) {
+    margin-right: 20px;
+}
+
+.Tab .Name {
+
+}
+
+.Tab .Decore {
+    width: 100%;
+    height: 2px;
+}

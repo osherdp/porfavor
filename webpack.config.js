@@ -15,7 +15,7 @@ module.exports = {
                 loader: "babel-loader"
             },
             {
-                test: /\.(jpe?g|png|gif)$/i, // to support eg. background-image property
+                test: /\.(jpe?g|png|gif|svg)$/i, // to support eg. background-image property
                 loader: "file-loader",
                 options: {
                     name: "[name].[ext]",
@@ -26,7 +26,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // to support @font-face rule
+                test: /\.(woff(2)?|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // to support @font-face rule
                 loader: "url-loader",
                 options: {
                     limit: "10000",
