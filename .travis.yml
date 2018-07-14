@@ -8,14 +8,16 @@ python:
 - '3.5'
 - '3.6'
 install: pip install tox
-script:
-- tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
-- npm install
-- npm run build
+script: tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
 jobs:
   include:
+  - stage: test
+    script:
+    - npm install
+    - npm run build
   - stage: deploy
     python: '3.6'
+    install: skip
     script: skip
     before_script: npm install && npm run build
     deploy:
