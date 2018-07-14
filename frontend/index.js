@@ -52,7 +52,6 @@ class App extends React.Component {
                                                                        onInput={this.onSearchInput.bind(this)}
                                                                        placeholder="Search" type="text"/></div>
             </div>
-            <hr/>
             <div className="Projects">
                 {display_projects}
             </div>

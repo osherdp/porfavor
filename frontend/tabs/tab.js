@@ -3,7 +3,7 @@ import React from "react";
 import "./tab.css";
 
 
-const SELECTED_COLOR = "#1976D2";
+const SELECTED_COLOR = "#4d4e4d";
 const HOVERED_COLOR = "#9E9E9E";
 const UNSELECTED_COLOR = "";
 

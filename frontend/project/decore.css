@@ -7,7 +7,7 @@
     border-radius: 10px;
     transform: scale(0, 0);
     transform-origin: 50% 50%;
-    background-color: white;
+    background-color: #9E9E9E;
     opacity: 0.3;
     position: absolute;
 }
