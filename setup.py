@@ -1,4 +1,6 @@
 """Define packaging-related data for deploying porfavor."""
+from __future__ import absolute_import
+
 import setuptools
 
 __version__ = "0.3.0"

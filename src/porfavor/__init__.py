@@ -1,4 +1,6 @@
 """Manage documentation in a client-server architecture."""
+from __future__ import absolute_import
+
 import click
 
 from .server import server_cli
