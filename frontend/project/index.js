@@ -12,7 +12,8 @@ export class Project extends React.Component {
         super(props);
         this.state = {
             project_name: props.data_name,
-            icon_src: DEFAULT_PROJECT_ICON,
+            icon_src: props.data_description.icon !== null?
+                props.data_description.icon:DEFAULT_PROJECT_ICON,
             decores: [],
             isClicked: false
         };

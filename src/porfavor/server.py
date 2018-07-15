@@ -50,8 +50,10 @@ def get_projects():
     for path in os.listdir(work_dir):
         if os.path.isdir(os.path.join(work_dir, path)):
             icon_path = os.path.join(work_dir, path, "icon.png")
+            revealed_icon_path = os.path.join("projects", path, "icon.png")
             projects[path] = {
-                "icon": icon_path if os.path.exists(icon_path) else None
+                "icon":
+                    revealed_icon_path if os.path.exists(icon_path) else None
             }
 
     return Response(json.dumps(projects), mimetype="application/json")
