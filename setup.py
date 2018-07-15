@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import setuptools
 
-__version__ = "0.4.2"
+__version__ = "0.4.1"
 
 setuptools.setup(
     name="porfavor",
