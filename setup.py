@@ -17,7 +17,10 @@ setuptools.setup(
 
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
-    package_data={"porfavor": ["static/**", "templates/**"]},
+    package_data={"porfavor": ["static/*",
+                               "static/img/*",
+                               "static/fonts/*",
+                               "templates/*"]},
     entry_points={
         "console_scripts": [
             "porfavor=porfavor:main",
