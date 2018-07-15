@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import setuptools
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 setuptools.setup(
     name="porfavor",
@@ -17,7 +17,10 @@ setuptools.setup(
 
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
-    package_data={"porfavor": ["static/**", "templates/**"]},
+    package_data={"porfavor": ["static/*",
+                               "static/img/*",
+                               "static/fonts/*",
+                               "templates/*"]},
     entry_points={
         "console_scripts": [
             "porfavor=porfavor:main",
