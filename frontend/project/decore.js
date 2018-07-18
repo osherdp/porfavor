@@ -19,7 +19,7 @@ export class Decore extends React.Component {
     }
     render() {
         return (<div style={{
-            transform: `scale(${this.state.width}, ${this.state.width})`,
+            transform: `scale(${this.state.width * 1.5}, ${this.state.width * 1.5})`,
             top: this.props.y,
             left: this.props.x
         }} className="DecoreNode"/>)
