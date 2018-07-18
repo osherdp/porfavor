@@ -1,78 +1,124 @@
 @font-face {
-    font-family: 'JosefinSans';
-    src: url("JosefinSans-Regular.ttf");
+    font-family: 'Roboto';
+    src: url("Roboto-Regular.ttf");
 }
-html, body {
-    font-family: 'JosefinSans', sans-serif;
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    position: absolute;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #1c6284;
+    border-radius: 10px;
+}
+
+
+
+html, body, #App {
+    font-family: 'Roboto', sans-serif;
     width: 100%;
     height: 100%;
     margin: 0;
     display: flex;
-    flex-direction: column;
+    overflow: hidden;
 }
 .Container {
-    max-width: 800px;
-    padding: 10px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
 }
-.Container h1, .Container h4{
-    margin: 0;
+.Container .MainContent{
+    width: calc((170px + 10px) * 4 + 25px);
     margin-right: auto;
     margin-left: auto;
-    display: inline-block;
+    margin-top: 70px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
 }
-.Container h4 {
-    margin-bottom: 10px;
-}
-.Container hr {
-    height: 0;
-    width: 100%;
-}
-.Container .TopBar {
+.Container .MainContent header{
     display: flex;
     margin-bottom: 10px;
-    background-color: #EEEEEE;
-    padding: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
 }
-.Container .TopBar .Spacer {
+.Container .MainContent header .Title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    width: 40%;
+    border-radius: 20px;
+    display: flex;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+}
+.Container .MainContent header .Title span {
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    color: #0381bd;
+}
+.Spacer {
     flex: 1;
 }
-.Container .TopBar .Search {
+.Container header .Search {
     background-color: #FAFAFA;
     border: 1px solid #FAFAFA;
     display: flex;
     box-sizing: border-box;
-    padding-left: 5px;
-    padding-right: 5px;
     transition: 0.5s;
-    border-radius: 5px;
-}
-.Container .TopBar .Search:focus-within {
-    /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);*/
-    border: 1px solid #000000;
-}
-.Container .TopBar .Search input {
-    background-color: rgba(0,0,0,0);
-    height: 30px;
-    border: 0;
-    margin-left: 10px;
-}
-.Container .TopBar .Search input:focus {
-    outline: none;
-}
-.Container .TopBar .Search img {
-    width: 20px;
-    height: 20px;
+    border-radius: 20px;
     margin-top: auto;
     margin-bottom: auto;
+    position: absolute;
+    width: 40px;
+    z-index: 1;
+    height: 40px;
+    right: 0;
 }
 
-.Container .Projects {
+.Container header .Search input {
+    background-color: rgba(0,0,0,0);
+    height: 100%;
+    width: 0;
+    border: 0;
+    flex: 1;
+}
+.Container header .Search input:focus {
+    outline: none;
+}
+.Container header .Search .ImgContainer{
+    width: 40px;
+    height: 40px;
     display: flex;
-    flex-direction: column;
+    cursor: pointer;
+}
+.Container header .Search img {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+}
+
+.Container .ProjectsContainer {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex: 1;
+}
+.Container .Projects {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.Container footer{
+    height: 70px;
 }

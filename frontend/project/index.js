@@ -44,9 +44,11 @@ export class Project extends React.Component {
             decores: this.state.decores.slice(1)
         });
     }
-    onMouseUp() {
-        this.resetDecore();
-        window.location = this.href;
+    onMouseUp(e) {
+        if(e.button === 0) {
+            this.resetDecore();
+            window.location = this.href;
+        }
     }
     render() {
         const decores = this.state.decores;
@@ -57,7 +59,7 @@ export class Project extends React.Component {
             <div className="Decore">
                 {decores}
             </div>
-            <div className="Picture"><img src={this.state.icon_src}/></div>
+            <div className="Picture"><img src={this.state.icon_src} draggable="false"/></div>
             <div className="Name"><span>{this.state.project_name}</span></div>
         </div>)
     }
