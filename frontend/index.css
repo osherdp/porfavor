@@ -113,8 +113,6 @@ html, body, #App {
     overflow-x: hidden;
     overflow-y: scroll;
     flex: 1;
-    background-color: #ffffff08;
-    border-radius: 10px;
 }
 .Container .Projects {
     padding: 10px;
