@@ -8,8 +8,7 @@ Options:
     -h --help           Display help message and exit.
 """
 # pylint: disable=no-value-for-parameter
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 
 import os
 import shutil
@@ -32,6 +31,7 @@ def publish(host, project, root_dir):
     temp_dir = None
     try:
         temp_dir = tempfile.mkdtemp()
+
         click.secho("Zipping content of folder '{}'... ".format(root_dir),
                     nl=False)
         shutil.make_archive(os.path.join(temp_dir, project), "zip", root_dir)

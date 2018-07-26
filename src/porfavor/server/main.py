@@ -11,13 +11,12 @@ Options:
     --port <port> -p <port>   Port for the web server [Default: 5000].
 """
 # pylint: disable=no-value-for-parameter
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 
 import os
 
 import click
-from flask import Flask, render_template, abort, send_file, Response, json
+from flask import Flask, render_template, abort, send_file
 
 from .api import api
 
@@ -43,23 +42,6 @@ def index():
 
     return render_template("index.html",
                            projects=projects)
-
-
-@app.route('/api/get_projects')
-def get_projects():
-    """Map every project to its info."""
-    work_dir = app.config["UPLOAD_FOLDER"]
-    projects = {}
-    for path in os.listdir(work_dir):
-        if os.path.isdir(os.path.join(work_dir, path)):
-            icon_path = os.path.join(work_dir, path, "icon.png")
-            revealed_icon_path = os.path.join("projects", path, "icon.png")
-            projects[path] = {
-                "icon":
-                    revealed_icon_path if os.path.exists(icon_path) else None
-            }
-
-    return Response(json.dumps(projects), mimetype="application/json")
 
 
 def _serve_static_file_from_directory(base_dir, path):
@@ -104,7 +86,7 @@ def server_cli(work_dir, host, port):
     Warning: not to be used on production.
     """
     app.config["UPLOAD_FOLDER"] = work_dir
-    app.run(host=host, port=port)
+    app.run(host=host, port=port, debug=True)
 
 
 if __name__ == "__main__":
