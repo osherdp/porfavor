@@ -1,10 +1,13 @@
+"""All public API for javascript client and other clients."""
+from __future__ import absolute_import
+
 import os
 import json
 import zipfile
 
 from flask import Blueprint, request, current_app, Response
 
-api = Blueprint("api", __name__)
+api = Blueprint("api", __name__)  # pylint: disable=invalid-name
 
 
 @api.route('/get_projects')

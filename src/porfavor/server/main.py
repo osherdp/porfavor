@@ -17,7 +17,7 @@ from __future__ import absolute_import
 import os
 
 import click
-from flask import Flask, render_template, abort, send_file
+from flask import Flask, render_template, abort, send_file, Response, json
 
 from .api import api
 
@@ -60,31 +60,6 @@ def get_projects():
             }
 
     return Response(json.dumps(projects), mimetype="application/json")
-
-
-@app.route('/api/upload_docs', methods=["PUT"])
-def upload_documentation():
-    """Enable deployment of documentation files."""
-    if not request.files:
-        return "No file was supplied in the request", 400
-
-    for doc_file in request.files.values():
-        if doc_file.filename == "":
-            return "Documentation file name is empty", 400
-
-        if not doc_file.filename.endswith(".zip"):
-            return ("Documentation file {} is "
-                    "not a zip file".format(doc_file), 400)
-
-        local_zip_path = os.path.join(app.config["UPLOAD_FOLDER"],
-                                      doc_file.filename)
-        doc_file.save(local_zip_path)
-
-        with zipfile.ZipFile(local_zip_path) as zip_file:
-            destination_dir, _ = os.path.splitext(local_zip_path)
-            zip_file.extractall(destination_dir)
-
-    return "", 204
 
 
 def _serve_static_file_from_directory(base_dir, path):
