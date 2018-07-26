@@ -21,7 +21,6 @@ class App extends React.Component {
         this.search = React.createRef();
     }
     componentDidMount() {
-        console.log("loading projects");
         axios.get('api/get_projects')
             .then((response) => {
                 console.log(response.data);

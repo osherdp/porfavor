@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import click
 
-from .server import server_cli
+from .server.main import server_cli
 from .client import publish, publish_cli  # noqa
 
 

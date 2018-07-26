@@ -5,7 +5,7 @@ module.exports = {
     entry: "./frontend/index.js",
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "src", "porfavor", "static")
+        path: path.resolve(__dirname, "src", "porfavor", "server", "static")
     },
     module: {
         rules: [
@@ -21,7 +21,7 @@ module.exports = {
                     name: "[name].[ext]",
                     outputPath: "img/",
                     publicPath: "static/img/"
-                    // the images will be emmited to public/assets/images/ folder
+                    // the images will be emitted to public/assets/images/ folder
                     // the images will be put in the DOM <style> tag as eg. background: url(assets/images/image.png);
                 }
             },

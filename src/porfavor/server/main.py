@@ -1,9 +1,9 @@
 """Run the hosting documentation server.
 
 Usage:
-    server.py [WORK_DIR] [-H <host> | --host <host>]
+    main.py [WORK_DIR] [-H <host> | --host <host>]
                          [-p <port> | --port <port>]
-    server.py -h | --help
+    main.py -h | --help
 
 Options:
     -h --help                 Display help message and exit.
@@ -15,11 +15,11 @@ from __future__ import print_function
 from __future__ import absolute_import
 
 import os
-import json
-import zipfile
 
 import click
-from flask import Flask, render_template, abort, send_file, Response, request
+from flask import Flask, render_template, abort, send_file
+
+from .api import api
 
 
 app = Flask(__name__)  # pylint: disable=invalid-name
@@ -29,6 +29,9 @@ app.config["SECRET_KEY"] = (b'\xc0)\xc6\x13\x87b\xb2\xdf\xbd\x8d\t\x9a'
 app.config["UPLOAD_FOLDER"] = os.environ.get("PORFAVOR_WORK_DIR")
 if app.config["UPLOAD_FOLDER"]:
     app.config["UPLOAD_FOLDER"] = os.path.abspath(app.config["UPLOAD_FOLDER"])
+
+
+app.register_blueprint(api, url_prefix="/api")
 
 
 @app.route('/')
