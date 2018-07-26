@@ -13,7 +13,7 @@ api = Blueprint("api", __name__)  # pylint: disable=invalid-name
 @api.route('/get_projects')
 def get_projects():
     """Map every project to its info."""
-    work_dir = app.config["UPLOAD_FOLDER"]
+    work_dir = current_app.config["UPLOAD_FOLDER"]
     projects = {}
     for path in os.listdir(work_dir):
         if os.path.isdir(os.path.join(work_dir, path)):
