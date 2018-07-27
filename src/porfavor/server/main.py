@@ -44,19 +44,14 @@ def index():
                            projects=projects)
 
 
-def _serve_static_file_from_directory(base_dir, path):
-    """Serve a file."""
-    path = os.path.join(base_dir, path)
-    return send_file(path)
-
-
 @app.route('/static/<path:path>')
 def static_serve(path):
     """Serve static files."""
     static_directory = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         "static")
-    return _serve_static_file_from_directory(static_directory, path)
+
+    return send_file(os.path.join(static_directory, path))
 
 
 @app.route('/projects/<path:path>')
@@ -69,7 +64,7 @@ def static_proxy(path):
     if not actual_path.startswith(directory):
         abort(401)
 
-    return _serve_static_file_from_directory(work_dir, path)
+    return send_file(os.path.join(work_dir, path))
 
 
 @click.command("serve",
