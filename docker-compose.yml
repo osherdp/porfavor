@@ -1,0 +1,36 @@
+version: "2"
+services:
+  porfavor:
+    build: .
+    container_name: porfavor
+    environment:
+      - PORFAVOR_WORK_DIR=/workdir
+    command: "gunicorn --bind 0.0.0.0:8000 porfavor.server.main:app"
+    volumes:
+      - ./workdir:/workdir
+      - static-files:/code/src/porfavor/server/static
+    networks:
+      - proxy
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    depends_on:
+      - porfavor
+    ports:
+      - "${PORT}:8000"
+    volumes:
+      - ./config:/etc/nginx/conf.d
+      - ./workdir:/workdir
+      - static-files:/static
+    networks:
+      - proxy
+
+volumes:
+  static-files:
+
+networks:
+  proxy:
+    driver: bridge
