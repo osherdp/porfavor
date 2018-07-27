@@ -17,10 +17,10 @@ setuptools.setup(
 
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
-    package_data={"porfavor": ["static/*",
-                               "static/img/*",
-                               "static/fonts/*",
-                               "templates/*"]},
+    package_data={"porfavor": ["server/static/*",
+                               "server/static/img/*",
+                               "server/static/fonts/*",
+                               "server/templates/*"]},
     entry_points={
         "console_scripts": [
             "porfavor=porfavor:main",
@@ -37,7 +37,7 @@ setuptools.setup(
                 "pylint"]
     },
 
-    classifiers=(
+    classifiers=[
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
@@ -45,5 +45,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ),
+    ],
 )
