@@ -4,7 +4,7 @@ services:
     build: .
     container_name: porfavor
     environment:
-      - PORFAVOR_WORK_DIR=/workdir
+      - PORFAVOR_WORKDIR=/workdir
     command: "gunicorn --bind 0.0.0.0:8000 porfavor.server.main:app"
     volumes:
       - ./workdir:/workdir

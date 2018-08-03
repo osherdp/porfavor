@@ -25,9 +25,8 @@ app = Flask(__name__)  # pylint: disable=invalid-name
 app.config["SECRET_KEY"] = (b'\xc0)\xc6\x13\x87b\xb2\xdf\xbd\x8d\t\x9a'
                             b'\x81\x9f\x0e\xa0\xd6\xdd\xce\x95\x91ro\x10')
 
-app.config["UPLOAD_FOLDER"] = os.environ.get("PORFAVOR_WORK_DIR")
-if app.config["UPLOAD_FOLDER"]:
-    app.config["UPLOAD_FOLDER"] = os.path.abspath(app.config["UPLOAD_FOLDER"])
+app.config["UPLOAD_FOLDER"] = os.path.abspath(
+    os.environ.get("PORFAVOR_WORKDIR", "."))
 
 
 app.register_blueprint(api, url_prefix="/api")
