@@ -43,13 +43,15 @@ def get_zipped_content(file_or_directory):
     try:
         temp_dir = tempfile.mkdtemp()
 
-        zip_path = os.path.join(temp_dir, "content")
+        zip_path = os.path.join(temp_dir, "content.zip")
         if os.path.isfile(file_or_directory):
             with zipfile.ZipFile(zip_path, mode="w") as zipped_file:
                 zipped_file.write(file_or_directory)
 
         else:
-            shutil.make_archive(zip_path, "zip", file_or_directory)
+            # make_archive likes getting filename without the extension
+            shutil.make_archive(zip_path[:-len(".zip")], "zip",
+                                file_or_directory)
 
         click.secho("DONE!", bold=True, fg="green")
         with open(zip_path, "rb") as zipped_file:
