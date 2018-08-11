@@ -20,7 +20,7 @@ import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 
-def zip_content(file_or_directory):
+def get_zipped_content(file_or_directory):
     """Return zipped content of given file or directory.
 
     Args:
@@ -30,6 +30,15 @@ def zip_content(file_or_directory):
     Returns:
         str: bytes of the zip file containing required files.
     """
+    if os.path.splitext(file_or_directory)[1] == ".zip":
+        click.secho("File iz already zipped... ", nl=False)
+        click.secho("SKIP!", bold=True, fg="yellow")
+        with open(file_or_directory, "rb") as zipped_file:
+            return zipped_file.read()
+
+    click.secho("Zipping content of '{}'... ".format(file_or_directory),
+                nl=False)
+
     temp_dir = None
     try:
         temp_dir = tempfile.mkdtemp()
@@ -38,15 +47,41 @@ def zip_content(file_or_directory):
         if os.path.isfile(file_or_directory):
             with zipfile.ZipFile(zip_path, mode="w") as zipped_file:
                 zipped_file.write(file_or_directory)
+
         else:
             shutil.make_archive(zip_path, "zip", file_or_directory)
 
+        click.secho("DONE!", bold=True, fg="green")
         with open(zip_path, "rb") as zipped_file:
             return zipped_file.read()
 
     finally:
         if temp_dir is not None:
             shutil.rmtree(temp_dir)
+
+
+def deploy_documentation(content, host, project):
+    """Send documentation content to the server.
+
+    Args:
+        content (str): the zipped documentation content.
+        host (str): URL for reaching the server, e.g.: "docs:5000/".
+        project (str): the project's name.
+    """
+    click.secho("Publishing content for project '{}'... ".format(project),
+                nl=False)
+
+    filename = "{}.zip".format(project)
+    multipart = MultipartEncoder(
+        fields={"files": (filename, content, "text/plain")}
+    )
+    response = requests.put(
+        "http://{}/api/upload_docs".format(host),
+        data=multipart,
+        headers={"Content-Type": multipart.content_type})
+    response.raise_for_status()
+
+    click.secho("DONE!", bold=True, fg="green")
 
 
 def publish(host, project, file_or_directory):
@@ -58,33 +93,8 @@ def publish(host, project, file_or_directory):
         file_or_directory (str): path to the root directory or file containing
             the documentation, e.g.: "index.html", "path/to/root/dir".
     """
-    if os.path.splitext(file_or_directory)[1] == ".zip":
-        click.secho("File iz already zipped... ", nl=False)
-        click.secho("SKIP!", bold=True, fg="yellow")
-        with open(file_or_directory, "rb") as zipped_file:
-            content = zipped_file.read()
-
-    else:
-        click.secho("Zipping content of '{}'... ".format(file_or_directory),
-                    nl=False)
-        content = zip_content(file_or_directory)
-        click.secho("DONE!", bold=True, fg="green")
-
-    click.secho("Publishing content for project '{}'... ".format(project),
-                nl=False)
-
-    filename = "{}.zip".format(project)
-    multipart = MultipartEncoder(
-        fields={"files": (filename, content, "text/plain")}
-    )
-
-    response = requests.put(
-        "http://{}/api/upload_docs".format(host),
-        data=multipart,
-        headers={"Content-Type": multipart.content_type})
-
-    response.raise_for_status()
-    click.secho("DONE!", bold=True, fg="green")
+    content = get_zipped_content(file_or_directory)
+    deploy_documentation(content, host, project)
 
 
 @click.command("publish",
