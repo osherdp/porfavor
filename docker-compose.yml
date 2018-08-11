@@ -5,7 +5,6 @@ services:
     container_name: porfavor
     environment:
       - PORFAVOR_WORKDIR=/workdir
-    command: "gunicorn --bind 0.0.0.0:8000 porfavor.server.main:app"
     volumes:
       - ./workdir:/workdir
       - static-files:/code/src/porfavor/server/static
