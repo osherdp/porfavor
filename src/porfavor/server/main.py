@@ -10,10 +10,11 @@ Options:
     --host <host> -H <host>   Host ip address of the server [Default: 0.0.0.0].
     --port <port> -p <port>   Port for the web server [Default: 5000].
 """
-# pylint: disable=no-value-for-parameter
+# pylint: disable=no-value-for-parameter,no-member
 from __future__ import print_function, absolute_import
 
 import os
+import http.client
 
 import click
 from flask import Flask, render_template, abort, send_file
@@ -61,7 +62,7 @@ def static_proxy(path):
     actual_path = os.path.join(work_dir, path)
     directory, _ = os.path.split(actual_path)
     if not actual_path.startswith(directory):
-        abort(401)
+        abort(http.client.UNAUTHORIZED)
 
     return send_file(os.path.join(work_dir, path))
 
