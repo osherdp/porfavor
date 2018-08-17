@@ -111,3 +111,6 @@ package-lock.json
 
 # static files
 src/porfavor/server/static
+
+# workdir
+workdir/
