@@ -47,9 +47,8 @@ def index():
 @app.route('/static/<path:path>')
 def static_serve(path):
     """Serve static files."""
-    static_directory = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        "static")
+    static_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "static")
 
     return send_file(os.path.join(static_directory, path))
 
