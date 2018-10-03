@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import setuptools
 
-__version__ = "0.5.1"
+__version__ = "0.6.0"
 
 setuptools.setup(
     name="porfavor",
@@ -17,10 +17,10 @@ setuptools.setup(
 
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
-    package_data={"porfavor": ["static/*",
-                               "static/img/*",
-                               "static/fonts/*",
-                               "templates/*"]},
+    package_data={"porfavor": ["server/static/*",
+                               "server/static/img/*",
+                               "server/static/fonts/*",
+                               "server/templates/*"]},
     entry_points={
         "console_scripts": [
             "porfavor=porfavor:main",
@@ -30,6 +30,7 @@ setuptools.setup(
     python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*",
     install_requires=["flask",
                       "click",
+                      "future",
                       "requests",
                       "requests_toolbelt"],
     extras_require={
@@ -37,7 +38,7 @@ setuptools.setup(
                 "pylint"]
     },
 
-    classifiers=(
+    classifiers=[
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
@@ -45,5 +46,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ),
+    ],
 )

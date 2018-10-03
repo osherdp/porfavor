@@ -9,7 +9,7 @@ Publishing static documentation the easiest way possible!
 Install
 -------
 
-```shell
+```console
 $ pip install porfavor
 ```
 
@@ -20,15 +20,17 @@ On the server side, you should run the matching server-side implementation.
 It listens to any client and puts the given documentation in its right place.
 
 On the server, run:
-```shell
+```console
 $ pip install porfavor
+...
 $ porfavor serve .  # replace '.' with the desired working directory
+...
 ```
 
 Now, to deploy documentation on the server, all you have to do is running
 ```porfavor publish``` with the right arguments:
 
-```shell
+```console
 $ # porfavor publish <server's URL> \
 >                    <project name> \
 >                    <documentation root>
@@ -46,5 +48,5 @@ from porfavor import publish
 if __name__ == '__main__':
     publish(host="localhost:5000",
             project="project_name",
-            root_dir="root_dir")
+            file_or_directory="root_dir")
 ```
